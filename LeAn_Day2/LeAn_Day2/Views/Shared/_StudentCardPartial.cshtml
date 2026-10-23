@@ -1,0 +1,30 @@
+@model LeAn_Day2.Models.StudentInfo
+
+@* 
+    PARTIAL VIEW: _StudentCardPartial.cshtml
+    - Nhận dữ liệu (Model) do View cha truyền vào.
+*@
+
+<div class="card border rounded-2 h-100">
+    <div class="card-header bg-light d-flex justify-content-between align-items-center py-2">
+        <span class="fw-semibold text-dark">@Model.FullName</span>
+        <span class="text-secondary small">Mã SV: @Model.StudentId</span>
+    </div>
+    <div class="card-body">
+        <p class="mb-1">
+            <span class="text-secondary">Chuyên ngành:</span>
+            <span class="text-dark">@Model.Major</span>
+        </p>
+        <p class="mb-1">
+            <span class="text-secondary">Điểm GPA:</span>
+            <span class="fw-semibold text-dark">@Model.Gpa.ToString("0.00")</span>
+        </p>
+        <p class="mb-0">
+            <span class="text-secondary">Xếp loại:</span>
+            <span class="text-dark">@Model.Classification</span>
+        </p>
+    </div>
+    <div class="card-footer bg-white text-muted small py-2">
+        Nguồn: Partial View (_StudentCardPartial)
+    </div>
+</div>

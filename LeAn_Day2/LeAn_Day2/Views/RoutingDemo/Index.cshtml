@@ -1,0 +1,132 @@
+@{
+    ViewData["Title"] = "Demo Conventional Routing và Attribute Routing";
+}
+
+<div class="container py-2">
+    <!-- Tiêu đề trang -->
+    <div class="border-bottom pb-3 mb-4">
+        <h4 class="fw-bold mb-1">So Sánh: Conventional Routing &amp; Attribute Routing</h4>
+        <p class="text-secondary mb-0 small">
+            Ví dụ ngắn gọn minh họa sự khác biệt giữa định tuyến theo quy ước chung và định tuyến bằng thuộc tính trực tiếp.
+        </p>
+    </div>
+
+    <!-- 2 Cột thử nghiệm -->
+    <div class="row g-3">
+        <!-- CỘT 1: CONVENTIONAL ROUTING -->
+        <div class="col-md-6">
+            <div class="card h-100 border">
+                <div class="card-header bg-white py-2">
+                    <strong class="text-dark">1. Conventional Routing (Theo quy ước)</strong>
+                </div>
+                <div class="card-body">
+                    <p class="text-secondary small mb-3">
+                        Được cấu hình tập trung trong <code>Program.cs</code> với mẫu:
+                        <code>{controller=Home}/{action=Index}/{id?}</code>.
+                        URL phụ thuộc chặt chẽ vào tên Controller và tên Action.
+                    </p>
+
+                    <span class="text-secondary small d-block mb-2">Thử nghiệm các link thực tế:</span>
+                    <div class="list-group list-group-flush border rounded mb-3">
+                        <a href="/RoutingDemo/Standard" class="list-group-item list-group-item-action py-2">
+                            <span class="text-dark">/RoutingDemo/Standard</span>
+                            <span class="text-secondary small d-block">Gọi Action Standard không truyền tham số id</span>
+                        </a>
+                        <a href="/RoutingDemo/Standard/42" class="list-group-item list-group-item-action py-2">
+                            <span class="text-dark">/RoutingDemo/Standard/42</span>
+                            <span class="text-secondary small d-block">Gọi Action Standard với tham số id = 42</span>
+                        </a>
+                    </div>
+
+                    <span class="text-secondary small d-block mb-1">Khai báo trong Controller:</span>
+                    <pre class="bg-light border p-2 rounded small mb-0"><code>public IActionResult Standard(int? id)
+{
+    return View();
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- CỘT 2: ATTRIBUTE ROUTING -->
+        <div class="col-md-6">
+            <div class="card h-100 border">
+                <div class="card-header bg-white py-2">
+                    <strong class="text-dark">2. Attribute Routing (Theo thuộc tính)</strong>
+                </div>
+                <div class="card-body">
+                    <p class="text-secondary small mb-3">
+                        Gắn trực tiếp thuộc tính <code>[Route(...)]</code> trên Action. Tự do tùy biến URL thân thiện SEO và hỗ trợ ràng buộc kiểu dữ liệu (constraints).
+                    </p>
+
+                    <span class="text-secondary small d-block mb-2">Thử nghiệm các link thực tế:</span>
+                    <div class="list-group list-group-flush border rounded mb-3">
+                        <a href="/dinh-tuyen-tuy-bien" class="list-group-item list-group-item-action py-2">
+                            <span class="text-dark">/dinh-tuyen-tuy-bien</span>
+                            <span class="text-secondary small d-block">URL tùy biến tự do (ghi đè quy ước /RoutingDemo/Custom)</span>
+                        </a>
+                        <a href="/san-pham/105/laptop-dell" class="list-group-item list-group-item-action py-2">
+                            <span class="text-dark">/san-pham/105/laptop-dell</span>
+                            <span class="text-secondary small d-block">Ràng buộc {id:int} = 105 và tham số tùy chọn {slug?}</span>
+                        </a>
+                        <a href="/san-pham/chu-cai-loi" class="list-group-item list-group-item-action py-2">
+                            <span class="text-danger">/san-pham/chu-cai-loi</span>
+                            <span class="text-secondary small d-block">Sẽ báo lỗi 404 vì tham số id vi phạm ràng buộc :int</span>
+                        </a>
+                    </div>
+
+                    <span class="text-secondary small d-block mb-1">Khai báo trong Controller:</span>
+                    <pre class="bg-light border p-2 rounded small mb-0"><code>[Route("san-pham/{id:int}/{slug?}")]
+public IActionResult Product(int id, string? slug)
+{
+    return View();
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BẢNG SO SÁNH TỔNG HỢP -->
+    <div class="card mt-4 border">
+        <div class="card-header bg-white py-2">
+            <strong class="text-dark">Bảng so sánh tóm tắt</strong>
+        </div>
+        <div class="table-responsive">
+            <table class="table table-bordered table-sm mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th style="width: 20%;">Tiêu chí</th>
+                        <th style="width: 40%;">Conventional Routing</th>
+                        <th style="width: 40%;">Attribute Routing</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-secondary">Nơi khai báo</td>
+                        <td>Tập trung ở <code>Program.cs</code> (<code>app.MapControllerRoute</code>)</td>
+                        <td>Trực tiếp trên Controller / Action (<code>[Route(...)]</code>)</td>
+                    </tr>
+                    <tr>
+                        <td class="text-secondary">Quy tắc URL</td>
+                        <td>Theo mẫu chung: <code>{controller}/{action}/{id?}</code></td>
+                        <td>Tự do đặt bất kỳ mẫu URL nào mong muốn</td>
+                    </tr>
+                    <tr>
+                        <td class="text-secondary">Ràng buộc dữ liệu</td>
+                        <td>Khai báo phức tạp trong file cấu hình</td>
+                        <td>Gắn trực tiếp rất trực quan: <code>{id:int}</code>, <code>{name:alpha}</code></td>
+                    </tr>
+                    <tr>
+                        <td class="text-secondary">Độ ưu tiên</td>
+                        <td>Thấp hơn (bị Attribute Route ghi đè)</td>
+                        <td>Ưu tiên cao nhất khi đã gắn lên Action</td>
+                    </tr>
+                    <tr>
+                        <td class="text-secondary">Ứng dụng phù hợp</td>
+                        <td>Các trang MVC truyền thống, trang quản trị (Admin)</td>
+                        <td>Trang bán hàng, tin tức cần SEO, và đặc biệt là Web API</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
