@@ -10,5 +10,6 @@ namespace LeAn_day3.Models
         public string Name { get; set; }
         public string Description { get; set; } =string.Empty;
 
+        public List<Product>? Products { get; set; }
     }
 }

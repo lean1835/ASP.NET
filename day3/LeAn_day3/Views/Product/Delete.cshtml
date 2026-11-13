@@ -1,0 +1,28 @@
+﻿@model LeAn_day3.Models.Product
+
+@{
+    ViewData["Title"] = "Delete Product";
+    var categories = (List<LeAn_day3.Models.Category>)ViewBag.Categories;
+    var category = categories.FirstOrDefault(c => c.Id == Model.CategoryId);
+}
+
+<h1>Delete Product</h1>
+
+<p>Are you sure you want to delete this product?</p>
+
+<dl class="row">
+    <dt class="col-sm-2">Name</dt>
+    <dd class="col-sm-10">@Model.Name</dd>
+
+    <dt class="col-sm-2">Price</dt>
+    <dd class="col-sm-10">@Model.Price</dd>
+
+    <dt class="col-sm-2">Category</dt>
+    <dd class="col-sm-10">@category?.Name</dd>
+</dl>
+
+<form asp-action="Delete" asp-route-id="@Model.Id" method="post">
+    <input type="hidden" name="id" value="@Model.Id" />
+    <button type="submit" class="btn btn-danger">Delete</button>
+    <a asp-action="Index" class="btn btn-secondary">Cancel</a>
+</form>

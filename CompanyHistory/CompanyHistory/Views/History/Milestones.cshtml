@@ -1,0 +1,10 @@
+﻿<h1>Danh sách các cột mốc</h1>
+
+<ul>
+    @foreach (var item in (object[])ViewData["Miles"])
+    {
+        <li>@item</li>
+    }
+</ul>
+
+<partial name="_HistoryFooter" />

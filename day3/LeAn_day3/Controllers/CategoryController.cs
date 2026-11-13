@@ -7,6 +7,16 @@ namespace LeAn_day3.Controllers
 {
     public class CategoryController : Controller
     {
+
+        //Ilogger<CategoryController> _logger;
+        private readonly ILogger<CategoryController> _logger;
+        //khởi tạo logger thông qua dependency injection
+        //để có thể log thông tin trong controller
+        public CategoryController(ILogger<CategoryController> logger)
+        {
+            _logger = logger;
+        }
+
         // GET: CategoryController
         public ActionResult Index() //khi action hoạt động thì sẽ gọi và trả về view tương ứng
         {
@@ -17,6 +27,8 @@ namespace LeAn_day3.Controllers
         // GET: CategoryController/Details/5
         public ActionResult Details([FromRoute] int id)
         {
+            _logger.LogInformation("Fetching details for category with ID: {Id}", id);
+            _logger.LogError("This is a test error log for category ID: {Id}", id);
             //lấy ra category có id tương ứng từ danh sách truyền vào từ SeedData
             var category = SeedData.categories.FirstOrDefault(c => c.Id == id);
             if(category == null)
