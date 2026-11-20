@@ -1,0 +1,22 @@
+@model Day6_BaiTap_LeAn.Models.Movie
+
+@{
+    ViewData["Title"] = "Chi tiết phim";
+}
+
+<h1>Chi tiết phim</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Mã phim</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+    <dt class="col-sm-3">Tên phim</dt>
+    <dd class="col-sm-9">@Model.Title</dd>
+    <dt class="col-sm-3">Ngày phát hành</dt>
+    <dd class="col-sm-9">@Model.ReleaseDate.ToString("dd/MM/yyyy")</dd>
+    <dt class="col-sm-3">Thời lượng</dt>
+    <dd class="col-sm-9">@Model.Duration phút</dd>
+    <dt class="col-sm-3">Thể loại</dt>
+    <dd class="col-sm-9">@Model.Genre?.Name</dd>
+</dl>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

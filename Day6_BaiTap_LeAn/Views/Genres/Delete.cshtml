@@ -1,0 +1,13 @@
+@model Day6_BaiTap_LeAn.Models.Genre
+
+@{
+    ViewData["Title"] = "Xóa thể loại";
+}
+
+<h1>Xóa thể loại</h1>
+<div class="alert alert-warning">Bạn có chắc chắn muốn xóa thể loại “@Model.Name” không?</div>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

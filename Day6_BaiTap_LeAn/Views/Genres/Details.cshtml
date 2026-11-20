@@ -1,0 +1,18 @@
+@model Day6_BaiTap_LeAn.Models.Genre
+
+@{
+    ViewData["Title"] = "Chi tiết thể loại";
+}
+
+<h1>Chi tiết thể loại</h1>
+<hr />
+<dl class="row">
+    <dt class="col-sm-3">Mã thể loại</dt>
+    <dd class="col-sm-9">@Model.Id</dd>
+    <dt class="col-sm-3">Tên thể loại</dt>
+    <dd class="col-sm-9">@Model.Name</dd>
+    <dt class="col-sm-3">Số phim</dt>
+    <dd class="col-sm-9">@Model.Movies.Count</dd>
+</dl>
+<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-primary">Sửa</a>
+<a asp-action="Index" class="btn btn-secondary">Quay lại</a>

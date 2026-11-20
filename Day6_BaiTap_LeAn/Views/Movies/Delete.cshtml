@@ -1,0 +1,21 @@
+@model Day6_BaiTap_LeAn.Models.Movie
+
+@{
+    ViewData["Title"] = "Xóa phim";
+}
+
+<h1>Xóa phim</h1>
+<div class="alert alert-warning">Bạn có chắc chắn muốn xóa phim “@Model.Title” không?</div>
+<dl class="row">
+    <dt class="col-sm-3">Ngày phát hành</dt>
+    <dd class="col-sm-9">@Model.ReleaseDate.ToString("dd/MM/yyyy")</dd>
+    <dt class="col-sm-3">Thời lượng</dt>
+    <dd class="col-sm-9">@Model.Duration phút</dd>
+    <dt class="col-sm-3">Thể loại</dt>
+    <dd class="col-sm-9">@Model.Genre?.Name</dd>
+</dl>
+<form asp-action="Delete" method="post">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-danger">Xóa</button>
+    <a asp-action="Index" class="btn btn-secondary">Hủy</a>
+</form>

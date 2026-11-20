@@ -1,0 +1,40 @@
+@model IEnumerable<Day6_BaiTap_LeAn.Models.Movie>
+
+@{
+    ViewData["Title"] = "Quản lý phim";
+}
+
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Danh sách phim</h1>
+    <a asp-action="Create" class="btn btn-primary">Thêm phim</a>
+</div>
+
+<table class="table table-striped table-bordered align-middle">
+    <thead>
+        <tr>
+            <th>Mã</th>
+            <th>Tên phim</th>
+            <th>Ngày phát hành</th>
+            <th>Thời lượng (phút)</th>
+            <th>Thể loại</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movie in Model)
+        {
+            <tr>
+                <td>@movie.Id</td>
+                <td>@movie.Title</td>
+                <td>@movie.ReleaseDate.ToString("yyyy")</td>
+                <td>@movie.Duration</td>
+                <td>@movie.Genre?.Name</td>
+                <td class="text-end text-nowrap">
+                    <a asp-action="Details" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-secondary">Chi tiết</a>
+                    <a asp-action="Edit" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-primary">Sửa</a>
+                    <a asp-action="Delete" asp-route-id="@movie.Id" class="btn btn-sm btn-outline-danger">Xóa</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
